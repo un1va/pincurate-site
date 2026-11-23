@@ -9,13 +9,27 @@
   <link rel="icon" href="icon-128.png">
 </head>
 <body>
+  <!-- Icons used by the mockups below. -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-save" viewBox="0 0 24 24"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/></symbol>
+    <symbol id="i-repin" viewBox="0 0 24 24"><path d="M17 3l4 4-4 4M3 11V9a2 2 0 0 1 2-2h16M7 21l-4-4 4-4M21 13v2a2 2 0 0 1-2 2H3"/></symbol>
+    <symbol id="i-comment" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></symbol>
+    <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
+    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
+    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
+  </svg>
+
   <header class="top">
     <div class="wrap">
       <a class="brand" href="./">
-        <span class="logo"><svg viewBox="0 0 24 24"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/></svg></span>
+        <span class="logo"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>
         PinCurate
       </a>
       <nav>
+        <a href="#tour">Tour</a>
         <a href="#features">Features</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
@@ -28,22 +42,168 @@
       <h1>See what makes a pin work</h1>
       <p>PinCurate is a Chrome extension for Pinterest research. It shows each pin's saves and age right on the pin, sorts and filters what you find, and tracks how the pins you watch grow.</p>
       <div class="actions">
-        <!-- TODO: replace with the Chrome Web Store link once the listing is live. -->
-        <a class="btn" href="#">Add to Chrome – free</a>
+        <span class="btn soon" aria-disabled="true">Coming soon to Chrome</span>
         <a class="btn ghost" href="#pricing">See Pro</a>
       </div>
       <p class="note">Works in Chrome on desktop. No account, no sign-in.</p>
-
-      <div class="demo" aria-hidden="true">
-        <div class="card-demo">
-          <div class="pill">
-            <span><svg viewBox="0 0 24 24"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/></svg>12.4k <span class="gain">+310</span></span>
-            <span><svg viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></svg>86</span>
-            <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>2y</span>
-          </div>
-        </div>
-      </div>
     </div>
+
+    <!-- Product tour. The slides are drawn in HTML with made-up data; swap any slide's
+         .shot contents for <img src="..."> when real screenshots are ready. -->
+    <section id="tour" class="tour">
+      <div class="wrap">
+        <div class="slider" aria-roledescription="carousel" aria-label="Product tour">
+          <div class="track" tabindex="0">
+
+            <!-- 1. Badges -->
+            <figure class="slide" aria-label="1 of 5">
+              <div class="shot shot-grid">
+                <div class="pin p1">
+                  <div class="pill">
+                    <span><svg><use href="#i-save"/></svg>12.4k</span>
+                    <span><svg><use href="#i-repin"/></svg>1.2k</span>
+                    <span><svg><use href="#i-comment"/></svg>86</span>
+                    <span><svg><use href="#i-share"/></svg>240</span>
+                    <span><svg><use href="#i-clock"/></svg>2y</span>
+                    <span><svg><use href="#i-user"/></svg>48k</span>
+                  </div>
+                </div>
+                <div class="pin p2">
+                  <div class="pill">
+                    <span><svg><use href="#i-save"/></svg>3.1k</span>
+                    <span><svg><use href="#i-comment"/></svg>12</span>
+                    <span><svg><use href="#i-clock"/></svg>4mo</span>
+                    <span class="tag ad">AD</span>
+                  </div>
+                </div>
+                <div class="pin p3 ai">
+                  <div class="pill">
+                    <span><svg><use href="#i-save"/></svg>640</span>
+                    <span><svg><use href="#i-clock"/></svg>3w</span>
+                    <span class="tag">AI</span>
+                  </div>
+                </div>
+              </div>
+              <figcaption><b>Stats on every pin.</b> Saves, repins, comments, shares, age and pinner followers on a small badge. Ads are tagged; AI pins are dimmed, never hidden.</figcaption>
+            </figure>
+
+            <!-- 2. Popup, search page -->
+            <figure class="slide" aria-label="2 of 5">
+              <div class="shot shot-center">
+                <div class="ui popup">
+                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span><svg class="gear"><use href="#i-gear"/></svg></div>
+                  <div class="eyebrow">Search · living room decor</div>
+                  <div class="stats3">
+                    <div><b>214</b><small>pins loaded</small></div>
+                    <div><b>1.8k</b><small>median saves</small></div>
+                    <div><b>96k</b><small>top pin</small></div>
+                  </div>
+                  <div class="card">
+                    <div class="card-h">Saves spread <small>188 pins with saves</small></div>
+                    <div class="bar"><span>10k+ saves</span><i style="--w:18%"></i><em>18%</em></div>
+                    <div class="bar"><span>1k – 10k</span><i style="--w:44%"></i><em>44%</em></div>
+                    <div class="bar"><span>Under 1k</span><i style="--w:38%"></i><em>38%</em></div>
+                  </div>
+                  <div class="card">
+                    <div class="card-h">Pin age <small>214 pins</small></div>
+                    <div class="stack"><span style="flex:22;background:var(--teal)"></span><span style="flex:31;background:var(--mint)"></span><span style="flex:41;background:#9a9aa3"></span><span style="flex:6;background:var(--line)"></span></div>
+                    <div class="legend"><span>Under 3 months 22%</span><span>3–12 months 31%</span><span>Older 41%</span></div>
+                  </div>
+                  <div class="btn block">Open full view</div>
+                </div>
+              </div>
+              <figcaption><b>A summary of any page.</b> Click the toolbar icon on a search, board or pin to see how busy and how fresh the results are.</figcaption>
+            </figure>
+
+            <!-- 3. Popup, pin page -->
+            <figure class="slide" aria-label="3 of 5">
+              <div class="shot shot-center">
+                <div class="ui popup">
+                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span><svg class="gear"><use href="#i-gear"/></svg></div>
+                  <div class="eyebrow">This pin</div>
+                  <div class="pin-title">Warm minimalist living room ideas</div>
+                  <div class="muted-s">example-home.com · 1y old</div>
+                  <div class="stats4">
+                    <div><b>24.6k</b><small>saves</small></div>
+                    <div><b>2.1k</b><small>repins</small></div>
+                    <div><b>58</b><small>comments</small></div>
+                    <div><b>310</b><small>shares</small></div>
+                  </div>
+                  <div class="card">
+                    <div class="card-h">Saves, last 7 days <span class="gain">+412</span></div>
+                    <svg class="spark" viewBox="0 0 300 56" preserveAspectRatio="none"><path class="area" d="M0 50 L50 46 L100 41 L150 36 L200 26 L250 17 L300 6 L300 56 L0 56 Z"/><path class="line" d="M0 50 L50 46 L100 41 L150 36 L200 26 L250 17 L300 6"/></svg>
+                  </div>
+                  <div class="who">
+                    <div class="card"><small>Board</small><b>Living room</b><small>3.4k followers</small></div>
+                    <div class="card"><small>Pinner</small><b>Nora Interiors</b><small>182k followers</small></div>
+                  </div>
+                </div>
+              </div>
+              <figcaption><b>Everything about one pin.</b> On a pin's own page, the popup adds its board, its pinner and how its saves have grown.</figcaption>
+            </figure>
+
+            <!-- 4. Full view -->
+            <figure class="slide" aria-label="4 of 5">
+              <div class="shot shot-center">
+                <div class="ui full">
+                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span>
+                    <span class="tabs"><span class="on">Pins</span><span>Boards</span><span>Pinners</span><span>Watchlist</span><span>Growth</span></span>
+                  </div>
+                  <div class="toolbar"><span class="search">Search titles…</span><span class="chip">Sort: Saves ▾</span><span class="chip">Video</span><span class="chip">Idea</span><span class="chip">Export CSV</span></div>
+                  <table>
+                    <thead><tr><th>Pin</th><th>Saves</th><th class="hide-s">Repins</th><th class="hide-s">Comments</th><th class="hide-s">Shares</th><th>Age</th></tr></thead>
+                    <tbody>
+                      <tr><td>Cozy reading nook with built-in shelves</td><td>96k</td><td class="hide-s">8.4k</td><td class="hide-s">212</td><td class="hide-s">1.9k</td><td>3y</td></tr>
+                      <tr><td>Neutral living room color palette</td><td>41k</td><td class="hide-s">3.2k</td><td class="hide-s">97</td><td class="hide-s">820</td><td>2y</td></tr>
+                      <tr><td>Warm minimalist living room ideas</td><td>24.6k</td><td class="hide-s">2.1k</td><td class="hide-s">58</td><td class="hide-s">310</td><td>1y</td></tr>
+                      <tr><td>Small apartment layout tips</td><td>18k</td><td class="hide-s">1.4k</td><td class="hide-s">44</td><td class="hide-s">205</td><td>8mo</td></tr>
+                      <tr><td>DIY gallery wall in a weekend</td><td>9.2k</td><td class="hide-s">760</td><td class="hide-s">31</td><td class="hide-s">118</td><td>5mo</td></tr>
+                      <tr><td>Rattan and linen summer refresh</td><td>4.7k</td><td class="hide-s">390</td><td class="hide-s">9</td><td class="hide-s">64</td><td>6w</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+              <figcaption><b>A full research table.</b> Every pin you have seen, grouped by pins, boards and pinners. Sort, filter and export to CSV.</figcaption>
+            </figure>
+
+            <!-- 5. Growth -->
+            <figure class="slide" aria-label="5 of 5">
+              <div class="shot shot-center">
+                <div class="ui full">
+                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span>
+                    <span class="tabs"><span>Pins</span><span>Boards</span><span>Pinners</span><span>Watchlist</span><span class="on">Growth</span></span>
+                  </div>
+                  <div class="growth">
+                    <div>
+                      <div class="stats3">
+                        <div><b>+3.9k</b><small>saves gained, 7 days</small></div>
+                        <div><b>38</b><small>pins tracked</small></div>
+                        <div><b>4</b><small>boards and searches</small></div>
+                      </div>
+                      <div class="bars">
+                        <i style="--h:35%"></i><i style="--h:48%"></i><i style="--h:42%"></i><i style="--h:60%"></i><i style="--h:55%"></i><i style="--h:78%"></i><i style="--h:92%"></i>
+                      </div>
+                    </div>
+                    <div class="card risers">
+                      <div class="card-h">Fastest risers</div>
+                      <div class="r"><span>Rattan and linen summer refresh</span><span class="gain">+820</span></div>
+                      <div class="r"><span>Warm minimalist living room ideas</span><span class="gain">+412</span></div>
+                      <div class="r"><span>DIY gallery wall in a weekend</span><span class="gain">+275</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <figcaption><b>Watch pins and track growth.</b> Watch pins, boards and searches, and see which pins are rising each time you come back.</figcaption>
+            </figure>
+
+          </div>
+          <button class="nav prev" type="button" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
+          <button class="nav next" type="button" aria-label="Next slide"><svg><use href="#i-right"/></svg></button>
+          <div class="dots" role="tablist"></div>
+        </div>
+        <p class="note" style="text-align:center">Illustrations with sample data.</p>
+      </div>
+    </section>
 
     <section id="features">
       <div class="wrap">
@@ -86,6 +246,7 @@
           <div class="plan">
             <h3>Free</h3>
             <div class="price">$0</div>
+            <p class="note plan-sub">Free forever</p>
             <ul>
               <li>Every stat on every pin badge</li>
               <li>Toolbar popup on every page</li>
@@ -94,13 +255,13 @@
               <li>7 days of growth history</li>
               <li>Keep saved pins for up to 7 days</li>
             </ul>
-            <a class="btn ghost" href="#">Add to Chrome</a>
+            <span class="btn ghost soon" aria-disabled="true">Coming soon</span>
           </div>
           <div class="plan pro">
+            <span class="ribbon">Most popular</span>
             <h3>Pro</h3>
-            <!-- TODO: prices are placeholders until decided. -->
-            <div class="price">$6 <small>/ month</small></div>
-            <p class="note" style="margin:0">or $39 / year</p>
+            <div class="price">$4.99 <small>/ month</small></div>
+            <p class="note plan-sub">or $19.99 / year</p>
             <ul>
               <li>Everything in Free</li>
               <li>Every row in the full view, with paging</li>
@@ -110,13 +271,22 @@
               <li>Track every pin you scan</li>
               <li>Keep saved pins for up to 90 days</li>
               <li>Full CSV export, including the watchlist</li>
-              <li>One licence works in up to 3 browsers</li>
             </ul>
-            <!-- TODO: replace with the Dodo Payments checkout link. -->
-            <a class="btn" href="#">Get Pro</a>
+            <span class="btn soon" aria-disabled="true">Coming soon</span>
+          </div>
+          <div class="plan">
+            <h3>Lifetime</h3>
+            <div class="price">$49.99</div>
+            <p class="note plan-sub">One-time payment</p>
+            <ul>
+              <li>Everything in Pro</li>
+              <li>Pay once, no renewals</li>
+              <li>All future updates</li>
+            </ul>
+            <span class="btn ghost soon" aria-disabled="true">Coming soon</span>
           </div>
         </div>
-        <p class="note" style="text-align:center">Prices in USD. Taxes may apply at checkout. Payments are handled by Dodo Payments, our merchant of record. <a href="refund.html">Refund policy</a>.</p>
+        <p class="note" style="text-align:center">Prices in USD. Taxes may apply at checkout. One licence works in up to 3 browsers. Payments are handled by Dodo Payments, our merchant of record. <a href="refund.html">Refund policy</a>.</p>
       </div>
     </section>
 
@@ -138,7 +308,7 @@
         </details>
         <details>
           <summary>How do I cancel Pro?</summary>
-          <p>Use the link in your purchase email from Dodo Payments, or write to us. Pro stays active until the end of the period you paid for.</p>
+          <p>Use the link in your purchase email from Dodo Payments, or write to us. Pro stays active until the end of the period you paid for. Lifetime is a one-time payment, so there is nothing to cancel.</p>
         </details>
         <details>
           <summary>What happens to my watchlist if Pro ends?</summary>
@@ -159,10 +329,44 @@
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
         <a href="refund.html">Refunds</a>
-        <!-- TODO: contact address -->
-        <a href="mailto:CONTACT_EMAIL">Contact</a>
+        <a href="mailto:univa.apps@gmail.com">Contact</a>
       </p>
     </div>
   </footer>
+
+  <script>
+    (function () {
+      var slider = document.querySelector('.slider');
+      var track = slider.querySelector('.track');
+      var slides = track.querySelectorAll('.slide');
+      var dotsBox = slider.querySelector('.dots');
+      var dots = [];
+      function current() { return Math.round(track.scrollLeft / track.clientWidth); }
+      function go(i) {
+        i = (i + slides.length) % slides.length;
+        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
+      }
+      slides.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('aria-label', 'Slide ' + (i + 1));
+        b.addEventListener('click', function () { go(i); });
+        dotsBox.appendChild(b);
+        dots.push(b);
+      });
+      function mark() {
+        var c = current();
+        dots.forEach(function (d, i) { d.setAttribute('aria-current', i === c ? 'true' : 'false'); });
+      }
+      track.addEventListener('scroll', function () { window.requestAnimationFrame(mark); });
+      slider.querySelector('.prev').addEventListener('click', function () { go(current() - 1); });
+      slider.querySelector('.next').addEventListener('click', function () { go(current() + 1); });
+      track.addEventListener('keydown', function (e) {
+        if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
+      });
+      mark();
+    })();
+  </script>
 </body>
 </html>
