@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The licence key arrives in this page's URL: keep it out of referrers and search engines. -->
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex">
+  <title>Thank you – PinCurate</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="icon-128.png">
+  <style>
+    .thanks { padding: 56px 0 72px; }
+    .thanks h1 { font-size: clamp(28px, 5vw, 38px); margin: 0 0 10px; }
+    .thanks .lead { color: var(--muted); margin: 0 0 28px; font-size: 18px; }
+    .keybox { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 18px; margin: 0 0 28px; }
+    .keybox label { display: block; font-weight: 600; margin-bottom: 8px; }
+    .keyrow { display: flex; gap: 10px; flex-wrap: wrap; }
+    .keyrow code { flex: 1 1 260px; min-width: 0; padding: 11px 14px; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); font: 15px/1.4 ui-monospace, Consolas, monospace; overflow-wrap: anywhere; user-select: all; }
+    .keyrow + .keyrow { margin-top: 10px; }
+    .keyrow .btn { cursor: pointer; font: inherit; font-weight: 600; }
+    .keybox .hint { margin: 10px 0 0; color: var(--muted); font-size: 14px; }
+    ol.steps { padding-left: 22px; margin: 0 0 28px; }
+    ol.steps li { margin: 8px 0; }
+    .problem { border-left: 4px solid var(--amber); }
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <a class="brand" href="./">
+        <span class="logo"><svg viewBox="0 0 24 24"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/></svg></span>
+        PinCurate
+      </a>
+      <nav><a href="./#pricing">Pricing</a></nav>
+    </div>
+  </header>
+
+  <main class="wrap narrow thanks">
+    <!-- Shown after a successful payment -->
+    <div id="ok">
+      <h1>Thank you! PinCurate Pro is yours.</h1>
+      <p class="lead">Your licence key is below. We have also emailed it to you, together with your receipt from Dodo Payments.</p>
+
+      <div class="keybox" id="keys" hidden>
+        <label id="keys-label">Your licence key</label>
+        <div id="key-list"></div>
+        <p class="hint">Keep this key somewhere safe. It works in up to 3 browsers.</p>
+      </div>
+
+      <div class="keybox" id="nokey" hidden>
+        <label>Your licence key is on its way</label>
+        <p class="hint" style="margin:0">Look for an email from Dodo Payments with your key. If it has not arrived within a few minutes, check your spam folder, or write to <a href="mailto:univa.apps@gmail.com">univa.apps@gmail.com</a>.</p>
+      </div>
+
+      <h2>Turn on Pro</h2>
+      <ol class="steps">
+        <li>Click the PinCurate icon in Chrome's toolbar (pin it from the puzzle-piece menu if you do not see it), then open <strong>Settings</strong>.</li>
+        <li>Under <strong>PinCurate Pro</strong>, paste your key and click <strong>Apply</strong>.</li>
+        <li>You should see <em>“Pro is on”</em>. That's it: your saved pins and watchlist stay as they are.</li>
+      </ol>
+      <p class="note">To use Pro in another browser, paste the same key there. To move it, click <strong>Remove key</strong> in the old browser first. Manage or cancel a subscription with the link in your purchase email.</p>
+    </div>
+
+    <!-- Shown when the payment did not go through -->
+    <div id="failed" hidden>
+      <h1>The payment did not go through</h1>
+      <div class="keybox problem">
+        <p class="hint" style="margin:0">You have not been charged for Pro. You can <a href="./#pricing">try again</a>, perhaps with another payment method. If money was taken from your account, write to <a href="mailto:univa.apps@gmail.com">univa.apps@gmail.com</a> and we will sort it out.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <p>© 2026 univa. PinCurate is not affiliated with Pinterest.</p>
+      <p><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="refund.html">Refunds</a></p>
+    </div>
+  </footer>
+
+  <script>
+    // Dodo Payments sends the buyer here with ?status=…&license_key=…&email=… (plus payment_id or subscription_id).
+    // The key is shown on this page only: nothing is sent anywhere, and the query string is removed from the address
+    // bar and history right away, so the key does not linger in the URL.
+    (function () {
+      var q = new URLSearchParams(location.search);
+      if (location.search) history.replaceState(null, '', location.pathname + location.hash);
+
+      var status = (q.get('status') || '').toLowerCase();
+      var bad = ['failed', 'cancelled', 'canceled', 'requires_payment_method', 'expired'];
+      if (bad.indexOf(status) !== -1) {
+        document.getElementById('ok').hidden = true;
+        document.getElementById('failed').hidden = false;
+        return;
+      }
+
+      var keys = (q.get('license_key') || '').split(',').map(function (k) { return k.trim(); }).filter(Boolean);
+      if (!keys.length) { document.getElementById('nokey').hidden = false; return; }
+
+      document.getElementById('keys').hidden = false;
+      if (keys.length > 1) document.getElementById('keys-label').textContent = 'Your licence keys';
+      var list = document.getElementById('key-list');
+      keys.forEach(function (key) {
+        var row = document.createElement('div');
+        row.className = 'keyrow';
+        var code = document.createElement('code');
+        code.textContent = key;
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn';
+        btn.textContent = 'Copy';
+        btn.addEventListener('click', function () {
+          var done = function () { btn.textContent = 'Copied'; setTimeout(function () { btn.textContent = 'Copy'; }, 2000); };
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(key).then(done, function () { selectText(code, btn); });
+          } else {
+            selectText(code, btn);
+          }
+        });
+        row.appendChild(code);
+        row.appendChild(btn);
+        list.appendChild(row);
+      });
+
+      function selectText(el, btn) {
+        var r = document.createRange();
+        r.selectNodeContents(el);
+        var s = getSelection();
+        s.removeAllRanges();
+        s.addRange(r);
+        btn.textContent = 'Press Ctrl+C';
+      }
+    })();
+  </script>
+</body>
+</html>
