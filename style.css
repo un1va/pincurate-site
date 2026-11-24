@@ -161,6 +161,9 @@ table.compare { width: 100%; border-collapse: separate; border-spacing: 0; backg
 .cta-band p { color: rgba(255,255,255,.85); font-size: 18px; margin: 0 0 26px; }
 .cta-band .actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
+.tour { padding: 24px 0 64px; }
+.tour-video { display: block; width: 100%; height: auto; border-radius: 18px; background: #0e1112; box-shadow: 0 24px 60px rgba(20,40,40,.22), 0 0 0 1px rgba(0,0,0,.05); }
+
 @media (max-width: 860px) {
   .hero-grid, .row { grid-template-columns: 1fr; gap: 26px; }
   .row.flip .row-copy { order: 0; }
