@@ -3,295 +3,256 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PinCurate – See what makes a pin work</title>
-  <meta name="description" content="PinCurate is a Chrome extension that shows saves and age on Pinterest pins, lets you sort and filter them, and tracks how the pins you watch grow.">
+  <title>PinCurate: Pinterest pin stats, saves tracking and rank checker for Chrome</title>
+  <meta name="description" content="See saves, repins, comments and age on every Pinterest pin. Sort what you find, size up any search, and with Pro track how pins grow and where yours rank. Chrome extension, no account.">
+  <link rel="canonical" href="https://un1va.github.io/pincurate-site/">
+  <meta name="theme-color" content="#0B7A75">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PinCurate">
+  <meta property="og:title" content="PinCurate: the numbers behind every Pinterest pin">
+  <meta property="og:description" content="Saves, comments and age on every pin. Sort what you find, size up any search, and track how pins grow with Pro.">
+  <meta property="og:url" content="https://un1va.github.io/pincurate-site/">
+  <meta property="og:image" content="https://un1va.github.io/pincurate-site/img/og-image.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="PinCurate badges showing saves, comments and age on three pins">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="icon-128.png">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PinCurate",
+    "applicationCategory": "BrowserApplication",
+    "operatingSystem": "Chrome",
+    "description": "Chrome extension for Pinterest research: saves, repins, comments and age on every pin, a full research table, search insight, and with Pro, saves tracking, rank history and competitor research.",
+    "image": "https://un1va.github.io/pincurate-site/img/og-image.jpg",
+    "url": "https://un1va.github.io/pincurate-site/",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free version" },
+    "publisher": { "@type": "Organization", "name": "Univa Apps" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      { "@type": "Question", "name": "What does PinCurate Pro add?", "acceptedAnswer": { "@type": "Answer", "text": "Pro shows how pins change over time. You can watch pins, boards and searches and PinCurate records their saves about once an hour while you browse. You get a growth chart, the fastest rising pins, your rank in watched searches on every visit, a weekly summary of what moved, and the competitors and keyword gaps across your searches. Pro also removes the free limits: every row in the full view, all filters, full CSV export, pins kept up to 90 days and up to 10 of your own sites." } },
+      { "@type": "Question", "name": "How much does PinCurate Pro cost?", "acceptedAnswer": { "@type": "Answer", "text": "$4.99 a month, $19.99 a year, or $49.99 once for Lifetime. Prices are in US dollars; tax is added at checkout where it applies. Pro is coming soon." } },
+      { "@type": "Question", "name": "Do I need an account?", "acceptedAnswer": { "@type": "Answer", "text": "No. PinCurate has no account or sign-in. Pro is unlocked with a licence key that you paste into the extension's settings." } },
+      { "@type": "Question", "name": "Does PinCurate post, save or change anything on my Pinterest account?", "acceptedAnswer": { "@type": "Answer", "text": "No. It only reads. It never posts, saves, follows, likes or changes anything." } },
+      { "@type": "Question", "name": "Is PinCurate made by Pinterest?", "acceptedAnswer": { "@type": "Answer", "text": "No. PinCurate is an independent tool and is not affiliated with, endorsed by or sponsored by Pinterest." } }
+    ]
+  }
+  </script>
 </head>
 <body>
-  <!-- Icons used by the mockups below. -->
-  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-    <symbol id="i-save" viewBox="0 0 24 24"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/></symbol>
-    <symbol id="i-repin" viewBox="0 0 24 24"><path d="M17 3l4 4-4 4M3 11V9a2 2 0 0 1 2-2h16M7 21l-4-4 4-4M21 13v2a2 2 0 0 1-2 2H3"/></symbol>
-    <symbol id="i-comment" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4z"/></symbol>
-    <symbol id="i-share" viewBox="0 0 24 24"><path d="M12 3v12M7 8l5-5 5 5M5 14v6h14v-6"/></symbol>
-    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
-    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4 4-6 8-6s7 2 8 6"/></symbol>
-    <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/></symbol>
-    <symbol id="i-left" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
-    <symbol id="i-right" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></symbol>
-  </svg>
-
   <header class="top">
     <div class="wrap">
       <a class="brand" href="./">
-        <span class="logo"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>
+        <span class="logo"><svg viewBox="0 0 24 24"><path d="M6 2h12a1 1 0 0 1 1 1v19l-7-4-7 4V3a1 1 0 0 1 1-1z"/></svg></span>
         PinCurate
       </a>
       <nav>
-        <a href="#tour">Tour</a>
         <a href="#features">Features</a>
+        <a href="#pro">Pro</a>
         <a href="#pricing">Pricing</a>
         <a href="#faq">FAQ</a>
+        <a class="btn sm" href="#pricing">Get Pro</a>
       </nav>
     </div>
   </header>
 
   <main>
-    <div class="wrap hero">
-      <h1>See what makes a pin work</h1>
-      <p>PinCurate is a Chrome extension for Pinterest research. It shows each pin's saves and age right on the pin, sorts and filters what you find, and tracks how the pins you watch grow.</p>
-      <div class="actions">
-        <span class="btn soon" aria-disabled="true">Coming soon to Chrome</span>
-        <a class="btn ghost" href="#pricing">See Pro</a>
-      </div>
-      <p class="note">Works in Chrome on desktop. No account, no sign-in.</p>
-    </div>
-
-    <!-- Product tour. The slides are drawn in HTML with made-up data; swap any slide's
-         .shot contents for <img src="..."> when real screenshots are ready. -->
-    <section id="tour" class="tour">
-      <div class="wrap">
-        <div class="slider" aria-roledescription="carousel" aria-label="Product tour">
-          <div class="track" tabindex="0">
-
-            <!-- 1. Badges -->
-            <figure class="slide" aria-label="1 of 5">
-              <div class="shot shot-grid">
-                <div class="pin p1">
-                  <div class="pill">
-                    <span><svg><use href="#i-save"/></svg>12.4k</span>
-                    <span><svg><use href="#i-repin"/></svg>1.2k</span>
-                    <span><svg><use href="#i-comment"/></svg>86</span>
-                    <span><svg><use href="#i-share"/></svg>240</span>
-                    <span><svg><use href="#i-clock"/></svg>2y</span>
-                    <span><svg><use href="#i-user"/></svg>48k</span>
-                  </div>
-                </div>
-                <div class="pin p2">
-                  <div class="pill">
-                    <span><svg><use href="#i-save"/></svg>3.1k</span>
-                    <span><svg><use href="#i-comment"/></svg>12</span>
-                    <span><svg><use href="#i-clock"/></svg>4mo</span>
-                    <span class="tag ad">AD</span>
-                  </div>
-                </div>
-                <div class="pin p3 ai">
-                  <div class="pill">
-                    <span><svg><use href="#i-save"/></svg>640</span>
-                    <span><svg><use href="#i-clock"/></svg>3w</span>
-                    <span class="tag">AI</span>
-                  </div>
-                </div>
-              </div>
-              <figcaption><b>Stats on every pin.</b> Saves, repins, comments, shares, age and pinner followers on a small badge. Ads are tagged; AI pins are dimmed, never hidden.</figcaption>
-            </figure>
-
-            <!-- 2. Popup, search page -->
-            <figure class="slide" aria-label="2 of 5">
-              <div class="shot shot-center">
-                <div class="ui popup">
-                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span><svg class="gear"><use href="#i-gear"/></svg></div>
-                  <div class="eyebrow">Search · living room decor</div>
-                  <div class="stats3">
-                    <div><b>214</b><small>pins loaded</small></div>
-                    <div><b>1.8k</b><small>median saves</small></div>
-                    <div><b>96k</b><small>top pin</small></div>
-                  </div>
-                  <div class="card">
-                    <div class="card-h">Saves spread <small>188 pins with saves</small></div>
-                    <div class="bar"><span>10k+ saves</span><i style="--w:18%"></i><em>18%</em></div>
-                    <div class="bar"><span>1k – 10k</span><i style="--w:44%"></i><em>44%</em></div>
-                    <div class="bar"><span>Under 1k</span><i style="--w:38%"></i><em>38%</em></div>
-                  </div>
-                  <div class="card">
-                    <div class="card-h">Pin age <small>214 pins</small></div>
-                    <div class="stack"><span style="flex:22;background:var(--teal)"></span><span style="flex:31;background:var(--mint)"></span><span style="flex:41;background:#9a9aa3"></span><span style="flex:6;background:var(--line)"></span></div>
-                    <div class="legend"><span>Under 3 months 22%</span><span>3–12 months 31%</span><span>Older 41%</span></div>
-                  </div>
-                  <div class="btn block">Open full view</div>
-                </div>
-              </div>
-              <figcaption><b>A summary of any page.</b> Click the toolbar icon on a search, board or pin to see how busy and how fresh the results are.</figcaption>
-            </figure>
-
-            <!-- 3. Popup, pin page -->
-            <figure class="slide" aria-label="3 of 5">
-              <div class="shot shot-center">
-                <div class="ui popup">
-                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span><svg class="gear"><use href="#i-gear"/></svg></div>
-                  <div class="eyebrow">This pin</div>
-                  <div class="pin-title">Warm minimalist living room ideas</div>
-                  <div class="muted-s">example-home.com · 1y old</div>
-                  <div class="stats4">
-                    <div><b>24.6k</b><small>saves</small></div>
-                    <div><b>2.1k</b><small>repins</small></div>
-                    <div><b>58</b><small>comments</small></div>
-                    <div><b>310</b><small>shares</small></div>
-                  </div>
-                  <div class="card">
-                    <div class="card-h">Saves, last 7 days <span class="gain">+412</span></div>
-                    <svg class="spark" viewBox="0 0 300 56" preserveAspectRatio="none"><path class="area" d="M0 50 L50 46 L100 41 L150 36 L200 26 L250 17 L300 6 L300 56 L0 56 Z"/><path class="line" d="M0 50 L50 46 L100 41 L150 36 L200 26 L250 17 L300 6"/></svg>
-                  </div>
-                  <div class="who">
-                    <div class="card"><small>Board</small><b>Living room</b><small>3.4k followers</small></div>
-                    <div class="card"><small>Pinner</small><b>Nora Interiors</b><small>182k followers</small></div>
-                  </div>
-                </div>
-              </div>
-              <figcaption><b>Everything about one pin.</b> On a pin's own page, the popup adds its board, its pinner and how its saves have grown.</figcaption>
-            </figure>
-
-            <!-- 4. Full view -->
-            <figure class="slide" aria-label="4 of 5">
-              <div class="shot shot-center">
-                <div class="ui full">
-                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span>
-                    <span class="tabs"><span class="on">Pins</span><span>Boards</span><span>Pinners</span><span>Watchlist</span><span>Growth</span></span>
-                  </div>
-                  <div class="toolbar"><span class="search">Search titles…</span><span class="chip">Sort: Saves ▾</span><span class="chip">Video</span><span class="chip">Idea</span><span class="chip">Export CSV</span></div>
-                  <table>
-                    <thead><tr><th>Pin</th><th>Saves</th><th class="hide-s">Repins</th><th class="hide-s">Comments</th><th class="hide-s">Shares</th><th>Age</th></tr></thead>
-                    <tbody>
-                      <tr><td>Cozy reading nook with built-in shelves</td><td>96k</td><td class="hide-s">8.4k</td><td class="hide-s">212</td><td class="hide-s">1.9k</td><td>3y</td></tr>
-                      <tr><td>Neutral living room color palette</td><td>41k</td><td class="hide-s">3.2k</td><td class="hide-s">97</td><td class="hide-s">820</td><td>2y</td></tr>
-                      <tr><td>Warm minimalist living room ideas</td><td>24.6k</td><td class="hide-s">2.1k</td><td class="hide-s">58</td><td class="hide-s">310</td><td>1y</td></tr>
-                      <tr><td>Small apartment layout tips</td><td>18k</td><td class="hide-s">1.4k</td><td class="hide-s">44</td><td class="hide-s">205</td><td>8mo</td></tr>
-                      <tr><td>DIY gallery wall in a weekend</td><td>9.2k</td><td class="hide-s">760</td><td class="hide-s">31</td><td class="hide-s">118</td><td>5mo</td></tr>
-                      <tr><td>Rattan and linen summer refresh</td><td>4.7k</td><td class="hide-s">390</td><td class="hide-s">9</td><td class="hide-s">64</td><td>6w</td></tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <figcaption><b>A full research table.</b> Every pin you have seen, grouped by pins, boards and pinners. Sort, filter and export to CSV.</figcaption>
-            </figure>
-
-            <!-- 5. Growth -->
-            <figure class="slide" aria-label="5 of 5">
-              <div class="shot shot-center">
-                <div class="ui full">
-                  <div class="ui-head"><span class="brand-s"><span class="logo sm"><svg viewBox="0 0 24 24"><use href="#i-save"/></svg></span>PinCurate</span>
-                    <span class="tabs"><span>Pins</span><span>Boards</span><span>Pinners</span><span>Watchlist</span><span class="on">Growth</span></span>
-                  </div>
-                  <div class="growth">
-                    <div>
-                      <div class="stats3">
-                        <div><b>+3.9k</b><small>saves gained, 7 days</small></div>
-                        <div><b>38</b><small>pins tracked</small></div>
-                        <div><b>4</b><small>boards and searches</small></div>
-                      </div>
-                      <div class="bars">
-                        <i style="--h:35%"></i><i style="--h:48%"></i><i style="--h:42%"></i><i style="--h:60%"></i><i style="--h:55%"></i><i style="--h:78%"></i><i style="--h:92%"></i>
-                      </div>
-                    </div>
-                    <div class="card risers">
-                      <div class="card-h">Fastest risers</div>
-                      <div class="r"><span>Rattan and linen summer refresh</span><span class="gain">+820</span></div>
-                      <div class="r"><span>Warm minimalist living room ideas</span><span class="gain">+412</span></div>
-                      <div class="r"><span>DIY gallery wall in a weekend</span><span class="gain">+275</span></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <figcaption><b>Watch pins and track growth (Pro).</b> Watch pins, boards and searches, and see which pins are rising each time you come back.</figcaption>
-            </figure>
-
+    <!-- Hero -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div class="hero-copy">
+          <p class="kicker">Chrome extension for Pinterest research</p>
+          <h1>See the numbers behind <span class="hl">every pin.</span></h1>
+          <p class="hero-sub">Saves, repins, comments and age on every Pinterest pin, right where you browse. Find what works, size up a search before you post, and with Pro, watch your pins grow.</p>
+          <div class="actions">
+            <span class="btn lg soon" aria-disabled="true">Free for Chrome, coming soon</span>
+            <a class="btn lg ghost" href="#pro">See what Pro adds</a>
           </div>
-          <button class="nav prev" type="button" aria-label="Previous slide"><svg><use href="#i-left"/></svg></button>
-          <button class="nav next" type="button" aria-label="Next slide"><svg><use href="#i-right"/></svg></button>
-          <div class="dots" role="tablist"></div>
+          <ul class="trust">
+            <li>No account</li>
+            <li>Reads only, never posts</li>
+            <li>Your data stays in your browser</li>
+          </ul>
         </div>
-        <p class="note" style="text-align:center">Illustrations with sample data.</p>
+        <figure class="hero-shot">
+          <img src="img/shot1-badges.webp" width="1280" height="800" alt="PinCurate badges on a grid of pins, showing saves, repins, comments, shares, reactions, pin age and pinner followers">
+        </figure>
       </div>
     </section>
 
-    <section id="features">
+    <!-- Free features -->
+    <section id="features" class="band">
       <div class="wrap">
+        <p class="kicker center">Free</p>
         <h2>Everything you need to study pins</h2>
-        <p class="lead">The free version covers the essentials. Pro removes the limits.</p>
-        <div class="grid">
-          <div class="feature">
+        <p class="lead">Free forever. No sign-up, no limits on the badges.</p>
+
+        <div class="row">
+          <div class="row-copy">
             <h3>Stats on every pin</h3>
-            <p>A small badge shows saves, repins, comments, shares, reactions, age and pinner followers. Ads and AI-generated pins are tagged; AI pins are dimmed, never hidden.</p>
+            <p>A small badge on each pin shows saves, repins, comments, shares, reactions, age and the pinner's followers. Pinterest hides most of these; PinCurate puts them where you look.</p>
+            <ul class="ticks"><li>Every number on every pin, free</li><li>Choose which numbers the badge shows</li><li>Three badge sizes</li></ul>
           </div>
-          <div class="feature">
-            <h3>Quick page summary</h3>
-            <p>Open the toolbar popup on any search, board or pin to see the best pins on the page at a glance.</p>
+          <img class="row-img" src="img/shot5-pin.webp" width="1280" height="800" loading="lazy" alt="A pin page with the PinCurate badge and the toolbar popup in dark mode showing saves, repins, comments, shares, board and pinner">
+        </div>
+
+        <div class="row flip">
+          <div class="row-copy">
+            <h3>Size up any search before you pin</h3>
+            <p>Open PinCurate on a search and see how hard its top 20 results are to beat: median saves, how fresh they are, which sites win, and a clear verdict.</p>
+            <ul class="ticks"><li>Looks open, mixed or crowded</li><li>Saves spread and pin age at a glance</li><li>Where your own pins rank (one site on Free)</li></ul>
           </div>
-          <div class="feature">
-            <h3>Full research view</h3>
-            <p>A full-tab table of the pins you have seen, grouped by pins, boards and pinners. Sort, filter and export to CSV.</p>
+          <img class="row-img" src="img/shot3-search.webp" width="1280" height="800" loading="lazy" alt="The PinCurate popup on a search showing your pins' rank, a Looks open verdict and the saves spread">
+        </div>
+
+        <div class="row">
+          <div class="row-copy">
+            <h3>Sort every pin you have seen</h3>
+            <p>Pins you browse are kept in one table for 7 days. Sort by saves, repins, comments or age, group them by board or pinner, and export to CSV.</p>
+            <ul class="ticks"><li>Pins, Boards and Pinners tabs</li><li>Search titles and websites</li><li>CSV export of the rows shown</li></ul>
           </div>
-          <div class="feature">
-            <h3>Watch and track growth (Pro)</h3>
-            <p>Watch pins, boards and searches. PinCurate records their saves each time you see them, so you can spot the pins that are rising.</p>
+          <img class="row-img" src="img/shot4-fullview.webp" width="1280" height="800" loading="lazy" alt="The PinCurate full view, a table of pins sorted by most saves">
+        </div>
+
+        <div class="row flip">
+          <div class="row-copy">
+            <h3>Spot AI pins and ads</h3>
+            <p>AI-made pins are dimmed, never hidden, and come back to full colour on hover. Sponsored pins get an AD tag. Both can be switched off.</p>
+            <ul class="ticks"><li>Cut through the noise in a busy feed</li><li>Optional slow auto-scroll to load more pins</li></ul>
           </div>
-          <div class="feature">
-            <h3>Optional auto-scroll</h3>
-            <p>Load more pins without scrolling by hand. Off until you start it, slow, capped, and it stops when you scroll or leave the tab.</p>
-          </div>
-          <div class="feature">
-            <h3>Private by design</h3>
-            <p>Your saved pins and settings stay in your browser. No account, no analytics, nothing sent to us.</p>
-          </div>
+          <img class="row-img" src="img/shot2-ai-ads.webp" width="1280" height="800" loading="lazy" alt="A grid of pins where AI pins are dimmed and tagged AI, and a sponsored pin is tagged AD">
         </div>
       </div>
     </section>
 
-    <section id="pricing">
+    <!-- Pro -->
+    <section id="pro" class="pro-band">
       <div class="wrap">
-        <h2>Pricing</h2>
-        <p class="lead">Start free. Upgrade when you need more.</p>
+        <p class="kicker center light">PinCurate Pro</p>
+        <h2>Free shows how pins stand.<br><span class="hl">Pro shows how they change.</span></h2>
+        <p class="lead">A pin's saves today tell you little. How fast they grow, and where your pins rank week after week, tell you what to make next.</p>
+
+        <div class="row">
+          <div class="row-copy">
+            <h3>Watch a pin and see it grow</h3>
+            <p>Click the eye on any pin, board or search. PinCurate records its saves about once an hour while you have Pinterest open, and watched pins refresh on their own even when no page shows them.</p>
+            <ul class="ticks"><li>Saves gained, right on the badge</li><li>A trend line for every watched pin</li><li>Your own pins marked Mine and listed first</li></ul>
+          </div>
+          <img class="row-img" src="img/pro1-watch.webp" width="1280" height="800" loading="lazy" alt="The Pro watchlist: watched pins with saves, saves gained in 7 days, a trend line and best rank">
+        </div>
+
+        <div class="row flip">
+          <div class="row-copy">
+            <h3>See which pins are taking off</h3>
+            <p>Saves gained per day across everything you watch, and the pins rising fastest. Switch on "track every pin" to record up to 5,000 pins you come across, not just the ones you watch.</p>
+            <ul class="ticks"><li>Last 7, 30 or 90 days, or all time</li><li>Fastest risers, ranked</li><li>CSV export of the whole history</li></ul>
+          </div>
+          <img class="row-img" src="img/pro2-growth.webp" width="1280" height="800" loading="lazy" alt="The Pro growth tab: saves gained per day as a bar chart and the fastest rising pins">
+        </div>
+
+        <div class="row">
+          <div class="row-copy">
+            <h3>Know where your pins rank, every visit</h3>
+            <p>Watch the searches that matter to you. Each visit records your best rank and the change since last time. This week sums up which of your pins moved, what is new in the top 10, and which searches got harder.</p>
+            <ul class="ticks"><li>Rank history for up to 10 of your sites</li><li>Open, mixed or crowded, tracked over time</li><li>Board follower trends</li></ul>
+          </div>
+          <img class="row-img" src="img/pro3-rank.webp" width="1280" height="800" loading="lazy" alt="The Pro watchlist This week panel and watched search cards with verdict, best rank and change">
+        </div>
+
+        <div class="row flip">
+          <div class="row-copy">
+            <h3>See who outranks you, and where</h3>
+            <p>The websites holding the top results across your watched searches, how they moved, and the keyword gaps: searches where competitors rank and your pins do not.</p>
+            <ul class="ticks"><li>Competitors ranked by top places</li><li>Keyword gaps, ready to export</li><li>Built from your own visits, nothing else</li></ul>
+          </div>
+          <img class="row-img" src="img/pro4-sites.webp" width="1280" height="800" loading="lazy" alt="The Pro sites tab with competitor websites and keyword gaps">
+        </div>
+      </div>
+    </section>
+
+    <!-- Compare -->
+    <section id="compare">
+      <div class="wrap narrow">
+        <h2>Free or Pro</h2>
+        <p class="lead">Start free. Upgrade when you want to see change over time.</p>
+        <div class="table-wrap">
+          <table class="compare">
+            <thead><tr><th>Feature</th><th>Free</th><th>Pro</th></tr></thead>
+            <tbody>
+              <tr><td>Saves, repins, comments, shares, reactions, age and followers on every pin</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+              <tr><td>AI pins dimmed, ads tagged</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+              <tr><td>Toolbar popup: search verdict, saves spread, pin details</td><td class="y">Yes</td><td class="y">Yes</td></tr>
+              <tr><td>Your rank in a search (My sites)</td><td>1 site</td><td class="y">Up to 10 sites</td></tr>
+              <tr><td>Full view rows</td><td>First 7 pins, 3 boards, 3 pinners</td><td class="y">Every row, pages of 10, 50 or 100</td></tr>
+              <tr><td>Filters by saves, repins, comments, shares and date</td><td class="n">No</td><td class="y">Yes</td></tr>
+              <tr><td>CSV export</td><td>Rows shown</td><td class="y">Everything, watchlist included</td></tr>
+              <tr><td>Keep saved pins</td><td>7 days</td><td class="y">Up to 90 days</td></tr>
+              <tr><td>Watch pins, boards and searches</td><td class="n">No</td><td class="y">Yes</td></tr>
+              <tr><td>Saves history, growth chart, fastest risers</td><td class="n">No</td><td class="y">Yes</td></tr>
+              <tr><td>Track every pin you see (up to 5,000)</td><td class="n">No</td><td class="y">Yes</td></tr>
+              <tr><td>Rank history and This week</td><td class="n">No</td><td class="y">Yes</td></tr>
+              <tr><td>Competitors and keyword gaps</td><td class="n">No</td><td class="y">Yes</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Pricing -->
+    <section id="pricing" class="band">
+      <div class="wrap">
+        <h2>Simple pricing</h2>
+        <p class="lead">One key unlocks Pro in up to 3 browsers. No account.</p>
         <div class="plans">
           <div class="plan">
-            <h3>Free</h3>
-            <div class="price">$0</div>
-            <p class="note plan-sub">Free forever</p>
-            <ul>
-              <li>Every stat on every pin badge</li>
-              <li>Toolbar popup on every page</li>
-              <li>Full view: top 7 pins, top 3 boards and pinners</li>
-              <li>Keep saved pins for up to 7 days</li>
-            </ul>
+            <h3>Monthly</h3>
+            <div class="price">$4.99<small>/month</small></div>
+            <p class="plan-sub">Cancel any time</p>
+            <ul class="ticks"><li>Everything in Pro</li><li>Billed every month</li></ul>
             <span class="btn ghost soon" aria-disabled="true">Coming soon</span>
           </div>
-          <div class="plan pro">
-            <span class="ribbon">Most popular</span>
-            <h3>Pro</h3>
-            <div class="price">Coming soon</div>
-            <p class="note plan-sub">Monthly or yearly plans</p>
-            <ul>
-              <li>Everything in Free</li>
-              <li>Every row in the full view, with paging</li>
-              <li>All filters: saves, repins, comments, shares, posted date</li>
-              <li>Watch pins, boards and searches</li>
-              <li>Saves growth over time, fastest rising pins</li>
-              <li>Track every pin you scan</li>
-              <li>Keep saved pins for up to 90 days</li>
-              <li>Full CSV export, including the watchlist</li>
-            </ul>
+          <div class="plan best">
+            <span class="ribbon">Best value</span>
+            <h3>Yearly</h3>
+            <div class="price">$19.99<small>/year</small></div>
+            <p class="plan-sub">$1.67 a month, 67% less than monthly</p>
+            <ul class="ticks"><li>Everything in Pro</li><li>Billed once a year</li></ul>
             <span class="btn soon" aria-disabled="true">Coming soon</span>
           </div>
           <div class="plan">
             <h3>Lifetime</h3>
-            <div class="price">Coming soon</div>
-            <p class="note plan-sub">One-time payment</p>
-            <ul>
-              <li>Everything in Pro</li>
-              <li>Pay once, no renewals</li>
-              <li>All future updates</li>
-            </ul>
+            <div class="price">$49.99<small> once</small></div>
+            <p class="plan-sub">Pay once, no renewals</p>
+            <ul class="ticks"><li>Everything in Pro</li><li>All future updates</li></ul>
             <span class="btn ghost soon" aria-disabled="true">Coming soon</span>
           </div>
         </div>
-        <p class="note" style="text-align:center">One licence works in up to 3 browsers. Payments are handled by Dodo Payments, our merchant of record. <a href="refund.html">Refund policy</a>.</p>
+        <p class="note center">Prices in US dollars. Tax is added at checkout where it applies. Payments are handled by Dodo Payments, our merchant of record. <a href="refund.html">Refund policy</a>.</p>
+        <p class="note center">Pro is coming soon. Everything you save on Free stays when you upgrade.</p>
       </div>
     </section>
 
+    <!-- FAQ -->
     <section id="faq">
       <div class="wrap narrow faq">
         <h2>Questions</h2>
         <p class="lead">&nbsp;</p>
+        <details>
+          <summary>What does Pro add?</summary>
+          <p>Pro shows how pins change over time: watch pins, boards and searches, see saves gained and the fastest risers, your rank in watched searches on every visit, a weekly summary of what moved, and the competitors and keyword gaps across your searches. It also removes the free limits: every row, all filters, full CSV export, pins kept up to 90 days and up to 10 of your own sites.</p>
+        </details>
+        <details>
+          <summary>When can I buy Pro?</summary>
+          <p>Pro is coming soon. The free version has everything on the free side of the table above, and nothing you save on Free is lost when you upgrade.</p>
+        </details>
         <details>
           <summary>Do I need an account?</summary>
           <p>No. PinCurate has no account or sign-in. Pro is unlocked with a licence key that you paste into the extension's settings.</p>
@@ -318,11 +279,23 @@
         </details>
       </div>
     </section>
+
+    <!-- Final call -->
+    <section class="cta-band">
+      <div class="wrap center">
+        <h2>Stop guessing which pins work.</h2>
+        <p>Start with the free badges today. Add Pro when you want to watch your pins grow.</p>
+        <div class="actions">
+          <span class="btn lg light soon" aria-disabled="true">Free for Chrome, coming soon</span>
+          <a class="btn lg outline-light" href="#pricing">See Pro pricing</a>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <p>© 2026 Univa Apps. PinCurate is not affiliated with Pinterest.</p>
+      <p>© 2026 Univa Apps. PinCurate is not affiliated with Pinterest. Images show sample data.</p>
       <p>
         <a href="privacy.html">Privacy</a>
         <a href="terms.html">Terms</a>
@@ -331,40 +304,5 @@
       </p>
     </div>
   </footer>
-
-  <script>
-    (function () {
-      var slider = document.querySelector('.slider');
-      var track = slider.querySelector('.track');
-      var slides = track.querySelectorAll('.slide');
-      var dotsBox = slider.querySelector('.dots');
-      var dots = [];
-      function current() { return Math.round(track.scrollLeft / track.clientWidth); }
-      function go(i) {
-        i = (i + slides.length) % slides.length;
-        track.scrollTo({ left: i * track.clientWidth, behavior: 'smooth' });
-      }
-      slides.forEach(function (_, i) {
-        var b = document.createElement('button');
-        b.type = 'button';
-        b.setAttribute('aria-label', 'Slide ' + (i + 1));
-        b.addEventListener('click', function () { go(i); });
-        dotsBox.appendChild(b);
-        dots.push(b);
-      });
-      function mark() {
-        var c = current();
-        dots.forEach(function (d, i) { d.setAttribute('aria-current', i === c ? 'true' : 'false'); });
-      }
-      track.addEventListener('scroll', function () { window.requestAnimationFrame(mark); });
-      slider.querySelector('.prev').addEventListener('click', function () { go(current() - 1); });
-      slider.querySelector('.next').addEventListener('click', function () { go(current() + 1); });
-      track.addEventListener('keydown', function (e) {
-        if (e.key === 'ArrowLeft') { e.preventDefault(); go(current() - 1); }
-        if (e.key === 'ArrowRight') { e.preventDefault(); go(current() + 1); }
-      });
-      mark();
-    })();
-  </script>
 </body>
 </html>
