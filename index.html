@@ -29,7 +29,14 @@
     "description": "Chrome extension for Pinterest research: saves, repins, comments and age on every pin, a full research table, search insight, and with Pro, saves tracking, rank history and competitor research.",
     "image": "https://un1va.github.io/pincurate-site/img/og-image.jpg",
     "url": "https://un1va.github.io/pincurate-site/",
-    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD", "description": "Free version" },
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD", "description": "Free version" },
+      { "@type": "Offer", "name": "Pro Monthly", "price": "4.99", "priceCurrency": "USD", "url": "https://un1va.github.io/pincurate-site/#pricing",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "4.99", "priceCurrency": "USD", "billingDuration": "P1M" } },
+      { "@type": "Offer", "name": "Pro Yearly", "price": "19.99", "priceCurrency": "USD", "url": "https://un1va.github.io/pincurate-site/#pricing",
+        "priceSpecification": { "@type": "UnitPriceSpecification", "price": "19.99", "priceCurrency": "USD", "billingDuration": "P1Y" } },
+      { "@type": "Offer", "name": "Lifetime", "price": "49.99", "priceCurrency": "USD", "url": "https://un1va.github.io/pincurate-site/#pricing", "description": "Everything in Pro, paid once" }
+    ],
     "publisher": { "@type": "Organization", "name": "Univa Apps" }
   }
   </script>
