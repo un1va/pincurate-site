@@ -151,10 +151,26 @@ table.compare { width: 100%; border-collapse: separate; border-spacing: 0; backg
 .compare td.n { color: var(--muted); }
 .compare td:nth-child(2), .compare td:nth-child(3) { width: 26%; }
 
-.plans { grid-template-columns: repeat(3, 1fr); }
+.plans { grid-template-columns: repeat(3, 1fr); align-items: stretch; }
+.plan { padding: 30px 28px; }
 .plan.best { border: 2px solid var(--teal); box-shadow: 0 18px 40px rgba(11,122,117,.18); }
-.plan-sub { color: var(--muted); font-size: 14.5px; }
-.plan .ticks { margin: 18px 0 22px; }
+.plan .plan-name { margin: 0; font: 700 13px/1 Inter, system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+.plan.best .plan-name { color: var(--teal); }
+.plan .price { display: flex; align-items: baseline; margin: 18px 0 6px; font: 700 52px/1 "Space Grotesk", Inter, sans-serif; letter-spacing: -2px; font-variant-numeric: tabular-nums; }
+.price .cur { align-self: flex-start; margin: 6px 2px 0 0; font-size: 24px; letter-spacing: 0; color: var(--muted); }
+.plan .price small { margin-left: 6px; font: 500 15px Inter, system-ui, sans-serif; letter-spacing: 0; color: var(--muted); }
+.plan-sub { color: var(--muted); font-size: 14.5px; margin: 0 0 22px; min-height: 1.6em; }
+.plan-inc { margin: 26px 0 12px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.plan .ticks { margin: 0; }
+.plan .ticks li { font-weight: 500; font-size: 15px; }
+.plan-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; min-height: 38px; }
+.bill { display: inline-flex; padding: 4px; border-radius: 999px; background: color-mix(in srgb, var(--teal) 9%, var(--card)); }
+.bill input { position: absolute; opacity: 0; pointer-events: none; }
+.bill label { padding: 6px 14px; border-radius: 999px; font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; }
+.bill input:checked + label { background: var(--teal); color: #fff; }
+.bill input:focus-visible + label { outline: 2px solid var(--teal); outline-offset: 2px; }
+.bill .save { margin-left: 4px; font-size: 12px; opacity: .85; }
+.plan:has(#bill-y:checked) .m, .plan:has(#bill-m:checked) .y { display: none; }
 
 .cta-band { background: radial-gradient(120% 140% at 0% 0%, #0f8f88 0%, #0b7a75 45%, #075a56 100%); color: #fff; padding: 72px 0; }
 .cta-band h2 { color: #fff; }
